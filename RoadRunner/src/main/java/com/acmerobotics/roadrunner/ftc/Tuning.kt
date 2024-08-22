@@ -20,6 +20,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.IMU
 import com.qualcomm.robotcore.hardware.VoltageSensor
+import com.qualcomm.robotcore.util.RobotLog
 import com.qualcomm.robotcore.util.SerialNumber
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
@@ -157,6 +158,8 @@ private fun recordEncoderData(e: Encoder, ts: Map<SerialNumber, Double>, ps: Mut
 
     ps.times.add(ts[sn]!!)
     ps.values.add(p.position.toDouble())
+
+    RobotLog.dd("RoadRunner","recordEncoderData Triggered")
 
     vs.times.add(ts[sn]!!)
     vs.values.add(p.velocity.toDouble())
@@ -400,10 +403,12 @@ class LateralRampLogger(val dvf: DriveViewFactory) : LinearOpMode() {
         }
 
         while (opModeIsActive()) {
-            setMotorPower(view.leftMotors[0], -1, data.frontLeftPower)
-            setMotorPower(view.rightMotors[0], +1, data.frontRightPower)
-            setMotorPower(view.leftMotors[1], +1, data.backLeftPower)
-            setMotorPower(view.rightMotors[1], -1, data.backRightPower)
+//            setMotorPower(view.leftMotors[0], -1, data.frontLeftPower)
+//            setMotorPower(view.rightMotors[0], +1, data.frontRightPower)
+//            setMotorPower(view.leftMotors[1], +1, data.backLeftPower)
+//            setMotorPower(view.rightMotors[1], -1, data.backRightPower)
+
+            RobotLog.dd("RoadRunner","opMode Cycled")
 
             data.voltages.values.add(view.voltageSensor.voltage)
             data.voltages.times.add(t.addSplit())
